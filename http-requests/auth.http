@@ -1,0 +1,29 @@
+
+### Do Login
+
+### SUPER
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+  "email": "super@gmail.com",
+  "password": "super"
+}
+
+### ADMIN
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "admin"
+}
+
+### GERENTE
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+  "email": "gerente@gmail.com",
+  "password": "super"
+}
