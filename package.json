@@ -1,8 +1,8 @@
 {
-  "name": "hello",
+  "name": "dynamic-incubator",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Dynamic Incubator is a flexible and configurable incubation and automation system framework TypeScript starter repository.",
+  "author": "Jonatan Potrikus",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
