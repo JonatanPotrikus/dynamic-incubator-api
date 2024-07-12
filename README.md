@@ -9,7 +9,7 @@
    
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**Dynamic Incubator** is a flexible and configurable incubation and automation system framework TypeScript starter repository.
 
 ## Installation
 
