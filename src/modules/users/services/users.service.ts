@@ -6,10 +6,14 @@ import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
 import { UserPresenter } from '../presenters/user.presenter';
 import { PaginatedUsers } from '../interfaces/UsersPaginated';
+import { EmailService } from 'src/shared/services/email.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private emailService: EmailService,
+  ) {}
 
   // When creating user, make the relationship with Company
   async create(data: CreateUserDto) {
@@ -42,6 +46,14 @@ export class UsersService {
       }
       return user;
     });
+
+    // Envie um e-mail de boas-vindas
+    await this.emailService.sendWelcomeEmail(
+      email,
+      user.name,
+      'Hélice Tech | Welcome 👋🏼',
+      `Hello, ${user.name}! Welcome to Our Service! Please verify your email by visiting the following link: http://localhost:3000`,
+    );
 
     return user;
   }
