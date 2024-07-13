@@ -4,9 +4,8 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
-import { CreateMachineDto } from '../../dto/create-machine-body';
-import { MachineTypes } from 'src/shared/enums/machine-types';
-import { Machine } from '../../dto/machine';
+import { CreateMachineDto } from '../../dto/create-machine-dto';
+import { UpdateMachineDto } from '../../dto/update-machine.dto';
 
 @Injectable()
 export class MachineService {
@@ -22,9 +21,9 @@ export class MachineService {
   }
 
   async create(createMachineDto: CreateMachineDto) {
-    const { ip } = createMachineDto;
+    const { companyId, ip, configs, sensors, ...rest } = createMachineDto;
 
-    // Verifica se o IP já está em uso
+    // Verify IP is already in use
     const existingMachine = await this.prisma.machine.findUnique({
       where: { ip },
     });
@@ -34,7 +33,33 @@ export class MachineService {
     }
 
     return await this.prisma.machine.create({
-      data: createMachineDto,
+      data: {
+        ...createMachineDto,
+        companyId,
+        configs: {
+          create: configs,
+        },
+        sensors: {
+          create: sensors,
+        },
+      },
+    });
+  }
+
+  async update(id: number, updateDto: UpdateMachineDto) {
+    const { configs, sensors } = updateDto;
+
+    return this.prisma.machine.update({
+      where: { id },
+      data: {
+        ...updateDto,
+        configs: {
+          create: configs,
+        },
+        sensors: {
+          create: sensors,
+        },
+      },
     });
   }
 

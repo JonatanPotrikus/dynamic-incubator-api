@@ -11,12 +11,41 @@ datasource db {
 }
 
 model Machine {
-  id   Int    @id @default(autoincrement())
-  ip   String 
-  name String
-  type String
+  id        Int             @id @default(autoincrement())
+  ip        String
+  name      String
+  type      String
+  companyId Int?
+  configs   MachineConfig[]
+  sensors   Sensor[]
+  Company   Company?        @relation(fields: [companyId], references: [id])
 
   @@unique([ip])
+}
+
+model MachineConfig {
+  id        Int     @id @default(autoincrement())
+  key       String
+  value     String
+  machineId Int
+  machine   Machine @relation(fields: [machineId], references: [id])
+}
+
+model Sensor {
+  id         Int        @id @default(autoincrement())
+  typeId     Int
+  machineId  Int
+  value      Float
+  timestamp  DateTime   @default(now())
+  sensorType SensorType @relation(fields: [typeId], references: [id])
+  machine    Machine    @relation(fields: [machineId], references: [id])
+}
+
+model SensorType {
+  id     Int      @id @default(autoincrement())
+  name   String
+  unit   String // (example: ºC, %, Pa)
+  Sensor Sensor[]
 }
 
 model User {
@@ -37,6 +66,7 @@ model Company {
   id            Int             @id @default(autoincrement())
   name          String
   UserCompanies UserCompanies[]
+  Machine       Machine[]
 }
 
 model UserCompanies {
