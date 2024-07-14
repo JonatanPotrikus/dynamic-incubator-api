@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './controllers/auth.controller';
 import { UsersService } from '../users/services/users.service';
 import { PrismaService } from 'src/database/prisma.service';
-import { EmailService } from 'src/shared/services/email.service';
+import { SendEmailModule } from '../send-email/send-email.module';
 
 @Module({
   imports: [
@@ -13,8 +13,9 @@ import { EmailService } from 'src/shared/services/email.service';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1d' },
     }),
+    SendEmailModule,
   ],
-  providers: [AuthService, UsersService, PrismaService, EmailService],
+  providers: [AuthService, UsersService, PrismaService],
   controllers: [AuthController],
 })
 export class AuthModule {}

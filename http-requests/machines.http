@@ -1,25 +1,37 @@
 ### List All Machines
 GET http://localhost:3000/machines
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsIm5hbWUiOiJTdXBlciIsImVtYWlsIjoic3VwZXJAZ21haWwuY29tIiwicm9sZSI6IlNVUEVSIiwiY3JlYXRlQXQiOiIyMDI0LTA3LTExVDA2OjQwOjUxLjg2MloiLCJ1cGRhdGVBdCI6IjIwMjQtMDctMTFUMDY6NDA6NTEuODYyWiIsImNvbXBhbnlJZCI6bnVsbCwiaWF0IjoxNzIwNjgwMDY2LCJleHAiOjE3MjA3NjY0NjZ9.y4hD-ZrtkSZOB5UU2YF8OrHHZTMDpDgFe1EHbb2KGE4
+Authorization: Bearer {TOKEN}
 
 ### Get By Id Machine
 
 GET http://localhost:3000/machines/10
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsIm5hbWUiOiJTdXBlciIsImVtYWlsIjoic3VwZXJAZ21haWwuY29tIiwicm9sZSI6IlNVUEVSIiwiY3JlYXRlQXQiOiIyMDI0LTA3LTExVDA2OjQwOjUxLjg2MloiLCJ1cGRhdGVBdCI6IjIwMjQtMDctMTFUMDY6NDA6NTEuODYyWiIsImNvbXBhbnlJZCI6bnVsbCwiaWF0IjoxNzIwNjgwMDY2LCJleHAiOjE3MjA3NjY0NjZ9.y4hD-ZrtkSZOB5UU2YF8OrHHZTMDpDgFe1EHbb2KGE4
+Authorization: Bearer {TOKEN}
 
 ### Create machine
 
 POST http://localhost:3000/machines
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsIm5hbWUiOiJTdXBlciIsImVtYWlsIjoic3VwZXJAZ21haWwuY29tIiwicm9sZSI6IlNVUEVSIiwiY3JlYXRlQXQiOiIyMDI0LTA3LTExVDA2OjQwOjUxLjg2MloiLCJ1cGRhdGVBdCI6IjIwMjQtMDctMTFUMDY6NDA6NTEuODYyWiIsImNvbXBhbnlJZCI6bnVsbCwiaWF0IjoxNzIwNjgwMDY2LCJleHAiOjE3MjA3NjY0NjZ9.y4hD-ZrtkSZOB5UU2YF8OrHHZTMDpDgFe1EHbb2KGE4
+Authorization: Bearer {TOKEN}
 
 {
-  "name": "INC NOVA",
-  "type": "INC",
-  "ip": "192.168.0.99"
+  "name": "NAS 1",
+  "type": "NAS",
+  "ip": "192.168.0.3",
+  "companyId": 1
+}
+
+
+### Create machine
+
+PATCH http://localhost:3000/machines/2
+Content-Type: application/json
+Authorization: Bearer {TOKEN}
+
+{
+  "name": "INC 1"
 }
 
 ### Delete Machine
 
 DELETE http://localhost:3000/machines/9
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsIm5hbWUiOiJTdXBlciIsImVtYWlsIjoic3VwZXJAZ21haWwuY29tIiwicm9sZSI6IlNVUEVSIiwiY3JlYXRlQXQiOiIyMDI0LTA3LTExVDA2OjQwOjUxLjg2MloiLCJ1cGRhdGVBdCI6IjIwMjQtMDctMTFUMDY6NDA6NTEuODYyWiIsImNvbXBhbnlJZCI6bnVsbCwiaWF0IjoxNzIwNjgwMDY2LCJleHAiOjE3MjA3NjY0NjZ9.y4hD-ZrtkSZOB5UU2YF8OrHHZTMDpDgFe1EHbb2KGE4
+Authorization: Bearer {TOKEN}

@@ -6,13 +6,13 @@ import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
 import { UserPresenter } from '../presenters/user.presenter';
 import { PaginatedUsers } from '../interfaces/UsersPaginated';
-import { EmailService } from 'src/shared/services/email.service';
+import { SendEmailQueueService } from 'src/modules/send-email/jobs/send-email-queue.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     private readonly prisma: PrismaService,
-    private emailService: EmailService,
+    private sendEmailQueueService: SendEmailQueueService,
   ) {}
 
   // When creating user, make the relationship with Company
@@ -47,13 +47,14 @@ export class UsersService {
       return user;
     });
 
-    // Envie um e-mail de boas-vindas
-    await this.emailService.sendWelcomeEmail(
+    // Send mail welcome user
+    await this.sendEmailQueueService.execute({
+      to: email,
       email,
-      user.name,
-      'Hélice Tech | Welcome 👋🏼',
-      `Hello, ${user.name}! Welcome to Our Service! Please verify your email by visiting the following link: http://localhost:3000`,
-    );
+      name: user.name,
+      subject: 'Hélice Tech | Welcome 👋🏼',
+      text: `Hello, ${user.name}! Welcome to Our Service! Please verify your email by visiting the following link: http://localhost:3000`,
+    });
 
     return user;
   }
