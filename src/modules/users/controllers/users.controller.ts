@@ -21,10 +21,13 @@ import { AllowedRoles } from 'src/shared/decorators/roles.decorator';
 import { UserRoles } from 'src/shared/enums/user-roles';
 import { User } from '@prisma/client';
 import { UserDecorator } from 'src/shared/decorators/user.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
 @UseGuards(AuthGuard, RolesGuard)
 @AllowedRoles(UserRoles.SUPER, UserRoles.ADMIN)
+@ApiTags('Users')
+@ApiBearerAuth()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

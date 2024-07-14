@@ -13,9 +13,12 @@ import { MachineService } from '../services/machine/machine.service';
 import { AuthGuard } from 'src/modules/auth/guard/auth/auth.guard';
 import { RolesGuard } from 'src/modules/auth/guard/role/role.guard';
 import { UpdateMachineDto } from '../dto/update-machine.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('machines')
 @UseGuards(AuthGuard, RolesGuard)
+@ApiTags('Machines')
+@ApiBearerAuth()
 export class MachineController {
   constructor(private machineService: MachineService) {}
 
